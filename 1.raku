@@ -1,12 +1,8 @@
 #!/usr/bin/rakudo
+my @thing = "input".IO.lines;
 
-my $fh = open "input";
+my ($increment, $j) = (0,0);
 
-my @thing = $fh.lines;
-
-
-my Int $increment = 0;
-my Int $j = 0;
 @thing.map: {
 	if $j == 0 {
 		++$j;
@@ -15,12 +11,10 @@ my Int $j = 0;
  	$increment++ if @thing[$j] > @thing[$j - 1];
 	$j++;
 }
-
 say "First: There were $increment increments";
-$j = 0;
-$increment = 0;
-my $p_sum = 0;
-my $sum = 0;
+
+my ($p_sum, $sum) = (0,0);
+($j, $increment) = (0,0);
 
 @thing.map: {
 	$sum = (@thing[$j..$j+2]).sum if $j <= 1997;
@@ -30,5 +24,4 @@ my $sum = 0;
 	$p_sum = $sum;
 	$j++;
 }
-
 say "Second: There were $increment increments";
